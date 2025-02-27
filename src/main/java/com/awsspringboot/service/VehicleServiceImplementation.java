@@ -6,6 +6,7 @@ import com.awsspringboot.repository.VehicleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,5 +23,16 @@ public class VehicleServiceImplementation implements VehicleService {
         vehicle.setAssociationDate(null);
 
         return vehicleRepository.save(vehicle);
+    }
+
+    @Override
+    public List<Vehicle> getAllVehicles() {
+        return (List<Vehicle>) vehicleRepository.findAll();
+    }
+
+    @Override
+    public Vehicle findById(String vehicleId) {
+        return vehicleRepository.findById(vehicleId)
+                .orElseThrow();
     }
 }

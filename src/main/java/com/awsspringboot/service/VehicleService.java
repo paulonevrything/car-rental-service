@@ -2,6 +2,12 @@ package com.awsspringboot.service;
 
 import com.awsspringboot.model.Vehicle;
 
+import java.util.List;
+
 public interface VehicleService {
-    public Vehicle create(Vehicle vehicle);
+    Vehicle create(Vehicle vehicle);
+
+    List<Vehicle> getAllVehicles();
+
+    Vehicle findById(String vehicleId);
 }

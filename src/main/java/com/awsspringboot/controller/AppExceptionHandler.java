@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.NoSuchElementException;
+
 @RestControllerAdvice
 public class AppExceptionHandler {
 
@@ -14,5 +16,11 @@ public class AppExceptionHandler {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public ErrorMessage handleInvalidParameter(MethodArgumentNotValidException e) {
         return new ErrorMessage(400, e.getAllErrors().getFirst().getDefaultMessage());
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public ErrorMessage notFound(NoSuchElementException e) {
+        return new ErrorMessage(404, "Not Found");
     }
 }

@@ -1,16 +1,12 @@
 package com.awsspringboot.controller;
 
-import com.awsspringboot.model.Status;
 import com.awsspringboot.model.Vehicle;
 import com.awsspringboot.service.VehicleService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
+import java.util.List;
 
 @RestController
 @RequestMapping("vehicles")
@@ -18,6 +14,16 @@ import java.util.UUID;
 public class VehicleController {
 
     private final VehicleService vehicleService;
+
+    @GetMapping
+    public List<Vehicle> getAll() {
+        return vehicleService.getAllVehicles();
+    }
+
+    @GetMapping("{vehicleId}")
+    public Vehicle get(@PathVariable String vehicleId) {
+        return vehicleService.findById(vehicleId);
+    }
 
     @PostMapping
     public Vehicle create(@Valid @RequestBody Vehicle vehicle) {
